@@ -1,0 +1,477 @@
+---
+title             : "Individual differences in judging the truthworthiness of Fake News about Covid-19"
+shorttitle        : "Psychological vulnerability to Fake News"
+author:
+  - name          : "Pasquale Capuozzo"
+    affiliation   : "1"
+  - name          : "Laura Giuntoli"
+    affiliation   : "1"
+  - name          : "Francesco Ceccarini"
+    affiliation   : "1"
+  - name          : "Ilaria Colpizzi"
+    affiliation   : "2"
+  - name          : "Virginia Alfei"
+    affiliation   : "2"
+  - name          : "Claudio Sica"
+    affiliation   : "3"
+  - name          : "Corrado Caudek"
+    affiliation   : "2"
+    corresponding : yes
+    email         : "corrado.caudek@unifi.it"
+affiliation:
+  - id            : "1"
+    institution   : "Department of General Psychology, University of Padova, Italy"
+  - id            : "2"
+    institution   : "NEUROFARBA Department, Psychology Section, University of Florence, Italy"
+  - id            : "3"
+    institution   : "Health Sciences Department, Psychology Section, University of Florence, Italy"
+abstract: |
+  The massive spread of fake news about COVID-19 made necessary a deeper understanding of both risk and protective psychological factors, making people more or less prone to fall for misinformation. Prior studies on individual differences in susceptibility to fake news have mostly dealt with events that do not bear any direct personal relevance to the subject. The Elaboration Likelihood Model (ELM) predicts that high personal involvement should increase the ability of correctly discriminating between fake news and true news. Therefore, we expect that, in a situation like a worldwide pandemic, individuals should be less likely to be influenced by risk factors in trusting fake news. The present study was conducted during the first national lockdown in Italy, between March and May 2020, when the personal involvement was very high. Here we tested 700 participants on the ability to discriminate fake news from true news about COVID-19, and we also measured several psychological risk and protective factors. Contrarily to the ELM predictions, we found that the psychological risk factors outweighed the protective factors, which indicates the presence of widespread beliefs in fake news about COVID-19. These results are relevant for policymakers planning social interventions about COVID-19 containment.
+bibliography      : ["fakenews.bib"]
+linenumbers       : yes
+linkcolor         : "blue"
+mask              : no
+draft             : no
+floatsintext      : yes
+csl               : "apa-with-abstract.csl"
+classoption       : "man"
+preamble: >
+  \usepackage{amsmath}
+output:
+  papaja::apa6_pdf:
+    includes:
+      after_body: "appendix.tex"
+    latex_engine: "xelatex"
+    extra_dependencies: ["xcolor"]
+editor_options: 
+  chunk_output_type: inline
+  markdown: 
+    wrap: sentence
+header-includes:
+  - \usepackage{rotating}
+  - \DeclareDelayedFloatFlavor{sidewaysfigure}{figure}  
+  - \DeclareDelayedFloatFlavor{sidewaystable}{table}
+  - \usepackage{pdflscape}                                
+  - \DeclareDelayedFloatFlavor{landscape}{table}   
+  - \raggedbottom 
+  - \usepackage{xcolor,makecell,array}
+  - \usepackage{graphicx}
+  - \setlength{\parskip}{0pt plus 0pt minus 0pt}
+  - \usepackage{multirow}
+  - \usepackage{setspace}
+  - \usepackage{booktabs}
+  - \usepackage{tabularx}
+  - \usepackage{caption}
+  - \usepackage{color, colortbl}
+  - \usepackage{newfloat}
+  - \DeclareFloatingEnvironment[fileext=los, listname=List of Schemes, name=Listing, placement=!htbp, within=section]{listing}
+  - \usepackage{placeins}
+---
+
+
+```{r packages, cache = FALSE, include = FALSE}
+suppressPackageStartupMessages(library("here"))
+suppressPackageStartupMessages(library("knitr"))
+suppressPackageStartupMessages(library("papaja"))
+suppressPackageStartupMessages(library("tidyverse"))
+suppressPackageStartupMessages(library("lavaan"))
+suppressPackageStartupMessages(library("brms"))
+suppressPackageStartupMessages(library("projpred"))
+library("ggthemes")
+suppressPackageStartupMessages(library("viridis"))
+library("tidyr")
+#suppressPackageStartupMessages(library("mice"))
+suppressPackageStartupMessages(library("corrplot"))
+suppressPackageStartupMessages(library("bayesplot"))
+suppressPackageStartupMessages(library("semPlot"))
+suppressPackageStartupMessages(library("rio"))
+suppressPackageStartupMessages(library("gt"))
+suppressPackageStartupMessages(library("glue"))
+suppressPackageStartupMessages(library("kableExtra"))
+theme_set(theme_apa())
+# source(here("libraries", "self_compassion_fnc.R"))
+# the_dir <- "/Users/corrado/Dropbox/papers/self_compassion/scripts/_mplus/"
+```
+
+```{r}
+r_refs(file = "r-references.bib")
+my_citation <- cite_r(file = "r-references.bib")
+```
+
+# Introduction
+
+
+
+# Methods
+
+
+
+## Participants
+
+
+
+## Material
+
+
+
+## Procedure
+
+Participants who completed the first administration were prevented to be part of the second sample. 
+
+
+## Data analysis
+
+Data cleaning, manipulation, and analyses were performed in R program version 4.1.0 [@R-base]. Descriptive analyses were facilitated by `tidyverse` package [@R-tidyverse]. Bayesian modeling to assess the associations between the truth discernment and overall belief and the available covariates was performed in Rstudio using Stan and associated packages. Bayesian regression models were fitted using the `brms` package [@R-brms_b]. Markov chain Monte Carlo diagnostics for the final model were performed with (a) the potential scale reduction statistic ($\hat{R}$), (b) the ratio of the effective sample size to the total sample size drawn from the posterior distribution, and (c) trace plots of Markov chain Monte Carlo generated through the `bayesplot` package. Residual check and posterior predictive checks were also performed using the `bayesplot` package. The highest density interval of the posterior distribution was estimated using the `bayestestR` package.
+
+Belief in Fake News was assessed by two common measures [@pennycook2021psychology]: truth discernment and overall belief. Truth discernment was computed as the degree of belief in True News minus the degree of belief in Fake News.Truth discernment is akin to the sensitivity measure ($d'$) of the Signal Detection Theory [SDT; @green1966signal]. In our sample, we found a correlation of `r 0.98` between truth discernment and $d'$. The $d'$ index was computed by using a multilevel Bayesian ordinal regression to fit a hierarchical unequal variance SDT model to the participants' ratings of the news headlines, with clustering (_i.e._, random effects) on the levels of participants and items. Overall belief was computed as the sum of the degrees of belief in True News and Fake News (without distinguishing between them). This second index is akin to SDT 'bias'.  Prior to analysis, all continuous regression inputs were standardized to have a mean of 0 and a standard deviation of 1. As the values for predictors and the response were standardized, a weakly informative normal(0, 1) priors was used for the predictor slopes and intercept. Similarly, a weakly informative Cauchy(0, 1) prior was used for the model standard deviation (sigma). 
+
+The question of whether individuals show a similar vulnerability to Fake News when dealing with issues that have a strong direct personal relevance (such as the news about Covid-19), or with issues that have only a weak and indirect personal relevance (such as political news that do not have an immediate impact on the every-day life of the participant) was framed within the statistical problem of finding the optimal subset of the predictors that can maximally predict an outcome measure and that can optimally generalize to new, out-of-sample data. 
+
+Statistical techniques as stepwise selection, which is based on _p_-values criterion or information criteria such as the AIC or BIC, or machine learning methods such as LASSO, in which the predictor slopes are continuously increased towards their least-squares solution, suffer from the problem of over-fitting. Because of over-fitting, models obtained with the previously mentioned techniques tend to provide a very good explain the data at hand (e.g., high $R^2$, low RMSE), but their performance does not generalize and perform poorly when faced with new data. For such models, moreover, _p_-values and confidence intervals  are invalid because they are computed by ignoring the selection procedure. 
+
+The problem of finding the best predictors subset has recently found a new solution within a Bayesian framework in terms of the Predictive projection feature selection method [@piironen2020projective]. At the first step, a reference model is fitted using all available predictors. At the second step, smaller submodels are fitted to approximate the reference model's predictions, using projection. The covariates in the best model for each submodel size are identified by decreasing the Kullback–Leibler divergence from the reference model to the projected submodel using a forward stepwise addition. The procedure selects the submodel with the smallest number of predictors which has similar predictive power as the reference model, judged by the mean log predictive density and the root mean square error. To avoid overfitting, at a third step the selected submodel is compared to the reference model on cross-validated prediction accuracy by using Pareto-smoothed importance sampling leave-one-out cross-validation (PSIS-LOO). 
+
+For covariate selection, the predictive projection technique proposed by Piironen et al. was applied to the political data set. Then, cross validation was performed on the COVID-19 data set by using the optimal subset of predictors selected in the first step of the analysis. We reasoned as follows: If the best subset of predictors selected concerning the veracity judgments of political news does not reliably decrease predictive accuracy of a regression model applied to the veracity judgments of COVID-19 news, then we can safely conclude that Fake News vulnerability is not domain-specific (at least for the two extreme domains presently considered) in the sense that times of crisis, such that of the COVID-19 pandemic, affect susceptibility to misinformation in the similar manner as when the news have negligible personal relevance.
+
+
+# Results
+
+## Preliminary Analysis and Descriptive Statistics
+
+## Truth discernment
+
+First, we fitted a Bayesian multiple regression reference model predicting truth discernment from 13 candidate predictors. Second, we used predictive projection to find the smallest possible submodel that would predict truth discernment almost as well as the reference model. Predictive projection was implemented by using the `projpred` package. The covariates were entered into the submodels using `forward` search and the submodels' predictive performance was evaluated using the expected log predictive density (ELPD) obtained through the Pareto-smoothed importance sampling leave-one-out cross-validation. For the optimal submodel, we chose the smallest submodel having an ELPD within 1 standard error of the reference model. To evaluate the models' performance, we used Bayesian $R^2 = \frac{\text{Var}_{\text{fit}}}{\text{Var}_{\text{fit}} + \text{Var}_{\text{res}}}$. Bayesian $R^2$ is a generalization of traditional $R^2$, but has the advantage of   incorporating posterior uncertainty while always remaining bounded below 1. Bayesian $R^2$ was used as a summary of predictive performance for comparing (a) between the reference and the projected models estimated on the political data set, and (b) across models estimated on different data sets (political news and COVID-19 news). 
+
+(ref:figr2pol) Bayesian $R^2$ of the reference model (13 predictors) for the political news data set and $R^2$ of the projected submodel (7 predictors), both showing 95% CI).
+
+```{r figr2refprojpol, out.width = "0.5\\linewidth", include = TRUE, fig.align = "center", fig.cap = "(ref:figr2pol)", echo = FALSE}
+knitr::include_graphics(here::here("figs", "r2_comp_pol.pdf"))
+```
+
+```{r tablerefpol, echo=FALSE}
+# reference model for the political news data set
+fit_ref_pol <- tar_read(fit_reference_pol)
+fit1 <- summary(fit_ref_pol)
+summary_mod1 <- rbind(data.frame(fit1$fixed), data.frame(fit1$spec_pars) )
+# rownames(summary_mod1) <- c("$\\alpha$", "$\\beta$", "$\\sigma_{e}$")
+colnames(summary_mod1) <- c("mean", "SE", "lower bound", "upper bound", "Rhat", "Bulk_ESS", "Tail_ESS")
+
+summary_mod1 %<>%
+  select(-c(Bulk_ESS, Tail_ESS)) %>% # removing ESS
+  rownames_to_column(var = "parameter")
+
+papaja::apa_table(
+  summary_mod1,
+  placement = "H",
+  align = c("c", "c", "c", "c", "c", "c"),
+  caption = "Posterior mean, standard error, 95\\% credible interval and $\\hat{R}$
+    statistic for each parameter of the model predicting political news truth discernment.",
+  note = NULL,
+  small = TRUE,
+  digits = 3,
+  escape = FALSE
+)
+```
+
+```{r, echo=FALSE}
+# discernment political news with all covariate
+fit_ref_pol <- targets::tar_read(fit_reference_pol)
+r2_ref_pol <- bayes_R2(fit_ref_pol)
+polcoef1 <- brms::fixef(fit_ref_pol) 
+
+# get sigma
+sum_fit_ref_pol <- summary(fit_ref_pol)
+summary_fit_ref_pol <- rbind(
+  data.frame(sum_fit_ref_pol$fixed), data.frame(sum_fit_ref_pol$spec_pars) 
+)
+# rownames(summary_mod1) <- c("$\\alpha$", "$\\beta$", "$\\sigma_{e}$")
+colnames(summary_fit_ref_pol) <- 
+  c("mean", "SE", "lower bound", "upper bound", "Rhat", "Bulk_ESS", "Tail_ESS")
+```
+
+```{r tablesubpol, echo=FALSE}
+# projection model for the political news data set
+fit_sub_pol <- targets::tar_read(fit_subset_pol)
+sum_fit_sub_pol <- summary(fit_sub_pol)
+summary_sub_pol <- rbind(data.frame(sum_fit_sub_pol$fixed), data.frame(sum_fit_sub_pol$spec_pars) )
+# rownames(summary_mod1) <- c("$\\alpha$", "$\\beta$", "$\\sigma_{e}$")
+colnames(summary_sub_pol) <- c("mean", "SE", "lower bound", "upper bound", "Rhat", "Bulk_ESS", "Tail_ESS")
+
+summary_sub_pol %<>%
+  select(-c(Bulk_ESS, Tail_ESS)) %>% # removing ESS
+  rownames_to_column(var = "parameter")
+
+papaja::apa_table(
+  summary_sub_pol,
+  placement = "H",
+  align = c("c", "c", "c", "c", "c", "c"),
+  caption = "Posterior mean, standard error, 95\\% credible interval and $\\hat{R}$
+    statistic for each parameter of the projection model predicting political news truth discernment.",
+  note = NULL,
+  small = TRUE,
+  digits = 3,
+  escape = FALSE
+)
+```
+
+```{r, echo=FALSE}
+# discernment political news with best subset of covariates
+r2_sub_pol <- bayes_R2(fit_sub_pol)
+polsubcoef <- brms::fixef(fit_sub_pol) 
+
+# get sigma
+sum_fit_sub_pol <- summary(fit_sub_pol)
+summary_fit_sub_pol <- rbind(
+  data.frame(sum_fit_sub_pol$fixed), data.frame(sum_fit_sub_pol$spec_pars) 
+)
+# rownames(summary_mod1) <- c("$\\alpha$", "$\\beta$", "$\\sigma_{e}$")
+colnames(summary_fit_sub_pol) <- 
+  c("mean", "SE", "lower bound", "upper bound", "Rhat", "Bulk_ESS", "Tail_ESS")
+```
+
+
+On the political news data, the reference model (see Table \ref{tab:tablerefpol}) had a Bayesian $R^2$ of `r round(r2_ref_pol[1], 2)`, 95% CI [`r round(r2_ref_pol[3], 2)`, `r round(r2_ref_pol[4], 2)`] (see Figure \ref{fig:figr2refprojpol}) and a model standard deviation/RMSE of `r round(summary_fit_ref_pol["sigma", 1], 2)`, 95% CI [`r round(summary_fit_ref_pol["sigma", 3], 2)`, `r round(summary_fit_ref_pol["sigma", 4], 2)`], indicating a moderately good predictive performance. By using predictive projection, we selected the best submodel according to the 1 SE criterion. The projected model, which included only 7 covariates, produced a predictive performance that was similar to that of the reference model with all 13 covariates (Figure \ref{fig:figr2refprojpol}). On the political news data set, the 1SE-submodel had a Bayesian $R^2$ of `r round(r2_sub_pol[1], 2)`, 95% CI [`r round(r2_sub_pol[3], 2)`, `r round(r2_sub_pol[4], 2)`] and a model standard deviation/RMSE of `r round(summary_fit_sub_pol["sigma", 1], 2)`, 95% CI [`r round(summary_fit_sub_pol["sigma", 3], 2)`, `r round(summary_fit_sub_pol["sigma", 4], 2)`].  The predicted values of the 1 SE-submodel were strongly associated with the predicted values of the reference model (Pearson r = 0.952 (see Figure \ref{fig:figr2subprojpol})). The seven predictors in the optimal submodel, in order as they were entered into the submodel, were: ...
+
+(ref:figr2subpol) Trajectories of the predictive projection feature selection and scatterplot of the predictions of the reference model versus the preditions of the optimal submodel. (a) Change in ELPD/decrease in RMSE as more predictors entered the submodel. (b) Truth discernment in political news judgment predicted by the reference model (13 predictors) as a function of the truth discernment predicted by the submodel (7 predictors); both predictions concerns the whole political news data set).
+
+```{r figr2subprojpol, out.width = "1.0\\linewidth", include = TRUE, fig.align = "center", fig.cap = "(ref:figr2subpol)", echo = FALSE}
+knitr::include_graphics(here::here("figs", "varsel.pdf"))
+```
+
+```{r, echo=FALSE}
+# discernment political news with all covariate
+fit_ref_pol <- targets::tar_read(fit_reference_pol)
+r2_ref_pol <- bayes_R2(fit_ref_pol)
+polcoef1 <- brms::fixef(fit_ref_pol) 
+
+# get sigma
+sum_fit_ref_pol <- summary(fit_ref_pol)
+summary_fit_ref_pol <- rbind(
+  data.frame(sum_fit_ref_pol$fixed), data.frame(sum_fit_ref_pol$spec_pars) 
+)
+# rownames(summary_mod1) <- c("$\\alpha$", "$\\beta$", "$\\sigma_{e}$")
+colnames(summary_fit_ref_pol) <- 
+  c("mean", "SE", "lower bound", "upper bound", "Rhat", "Bulk_ESS", "Tail_ESS")
+```
+
+```{r tablesubcovid, echo=FALSE}
+# projection model for the COVID-19 news data set
+fit_sub_covid <- targets::tar_read(fit_subset_covid)
+sum_fit_sub_covid <- summary(fit_sub_covid)
+summary_sub_covid <- rbind(
+  data.frame(sum_fit_sub_covid$fixed), data.frame(sum_fit_sub_covid$spec_pars)
+  )
+# rownames(summary_mod1) <- c("$\\alpha$", "$\\beta$", "$\\sigma_{e}$")
+colnames(summary_sub_covid) <- c("mean", "SE", "lower bound", "upper bound", "Rhat", "Bulk_ESS", "Tail_ESS")
+
+summary_sub_covid %<>%
+  select(-c(Bulk_ESS, Tail_ESS)) %>% # removing ESS
+  rownames_to_column(var = "parameter")
+
+papaja::apa_table(
+  summary_sub_covid,
+  placement = "H",
+  align = c("c", "c", "c", "c", "c", "c"),
+  caption = "Posterior mean, standard error, 95\\% credible interval and $\\hat{R}$
+    statistic for each parameter of the projection model predicting COVID-19 news truth discernment.",
+  note = NULL,
+  small = TRUE,
+  digits = 3,
+  escape = FALSE
+)
+```
+
+```{r, echo=FALSE}
+# discernment political news with 7 covariates
+r2_sub_covid <- bayes_R2(fit_sub_covid)
+covidsubcoef <- brms::fixef(fit_sub_covid) 
+
+# get sigma
+sum_fit_sub_covid <- summary(fit_sub_covid)
+summary_fit_sub_covid <- rbind(
+  data.frame(sum_fit_sub_covid$fixed), data.frame(sum_fit_sub_covid$spec_pars) 
+)
+# rownames(summary_mod1) <- c("$\\alpha$", "$\\beta$", "$\\sigma_{e}$")
+colnames(summary_fit_sub_covid) <- 
+  c("mean", "SE", "lower bound", "upper bound", "Rhat", "Bulk_ESS", "Tail_ESS")
+```
+
+The crucial point of the present statistical analysis is to evaluate by cross-validation the predictive performance of the selected submodel. The seven covariates selected from the political news data were used as predictors for truth discernment in the COVID-19 news data set. We found that the predictive performance of the selected submodel generalized well to the new data set: For the COVID-19 news data set, Bayesian $R^2$ = `r round(r2_sub_covid[1], 2)`, 95% CI [`r round(r2_sub_covid[3], 2)`, `r round(r2_sub_covid[4], 2)`] and an RMSE = `r round(summary_fit_sub_covid["sigma", 1], 2)`, 95% CI [`r round(summary_fit_sub_covid["sigma", 3], 2)`, `r round(summary_fit_sub_covid["sigma", 4], 2)`] (see Fig. 3b). For the COVID-19 data, therefore, the performance measures of the submodel are well-within the uncertainty bounds of the submodel applied to the political news data set. 
+
+Figure \ref{fig:coefsprojmodels} shows, for both the political news data set (panel A) and the COVID-19 news data set (panel B), the credible intervals for the seven predictors in the selected submodel. The pattern of results is very similar in the two cases, indicating that truth discernment is affected by psychological protective and vulnerability factors in a similar manner when the news have a direct personal relevance and when the news have no immediate personal relevance. Political orientation was the only dimension which differed in the two cases: Political orientation showed a facilitating effect for truth discernment in the case of the political news data, but not for the COVID-19 news data. We do not deem this difference to be surprising because opinions about COVID-19 were not strongly politically polarized in Italy -- differently from what happened in the United States, for example. 
+
+(ref:coefsprojmodels) (A) Credible intervals for predictors in the submodel for the political news data set. (B) Credible intervals for predictors in the submodel for the COVID-19 data set generated by using the same predictors that had been selected in the training set (political news data). Inner shaded area = 80% CI.
+
+```{r coefsprojmodels, out.width = "1.0\\linewidth", include = TRUE, fig.align = "center", fig.cap = "(ref:coefsprojmodels)", echo = FALSE}
+knitr::include_graphics(here::here("figs", "coefs.pdf"))
+```
+
+
+```{r,echo=FALSE}
+# discernment COVID-19 news with 13 covariates
+fit_ref_covid <- targets::tar_read(fit_reference_covid)
+
+r2_13_covid <- bayes_R2(fit_ref_covid)
+covid13coef <- brms::fixef(fit_ref_covid) 
+
+# get sigma
+sum_fit_13_covid <- summary(fit_ref_covid)
+summary_fit_13_covid <- rbind(
+  data.frame(sum_fit_13_covid$fixed), data.frame(sum_fit_13_covid$spec_pars) 
+)
+# rownames(summary_mod1) <- c("$\\alpha$", "$\\beta$", "$\\sigma_{e}$")
+colnames(summary_fit_13_covid) <- 
+  c("mean", "SE", "lower bound", "upper bound", "Rhat", "Bulk_ESS", "Tail_ESS")
+```
+
+```{r,echo=FALSE}
+# discernment COVID-19 news with the best subset of covariates selected by
+# projection and ignoring the political news data
+fit_bestsub_covid <- targets::tar_read(fit_best_subset_covid)
+
+r2_bestsub_covid <- bayes_R2(fit_best_subset_covid)
+covidbestsubcoef <- brms::fixef(fit_best_subset_covid) 
+
+# get sigma
+sum_fit_bestsub_covid <- summary(fit_bestsub_covid)
+summary_fit_bestsub_covid <- rbind(
+  data.frame(sum_fit_bestsub_covid$fixed), data.frame(sum_fit_bestsub_covid$spec_pars) 
+)
+# rownames(summary_mod1) <- c("$\\alpha$", "$\\beta$", "$\\sigma_{e}$")
+colnames(summary_fit_bestsub_covid) <- 
+  c("mean", "SE", "lower bound", "upper bound", "Rhat", "Bulk_ESS", "Tail_ESS")
+```
+
+For the COVID-19 news data set, the complete model with 13 covariates produced a Bayesian $R^2$ = `r round(r2_13_covid[1], 2)`, 95% CI [`r round(r2_13_covid[3], 2)`, `r round(r2_13_covid[4], 2)`] and an RMSE = `r round(summary_fit_13_covid["sigma", 1], 2)`, 95% CI [`r round(summary_fit_13_covid["sigma", 3], 2)`, `r round(summary_fit_13_covid["sigma", 4], 2)`]. Note that, for the submodel comprising the 7 covariates selected from the political news data, the posterior performance measures (both the Bayesian $R^2$ and the RMSE) are within the uncertainty bound of the full model with 13 covariates. As a further comparison, the optimal set of covariate selected by projection (ignoring the political news data) produced a Bayesian $R^2$ = `r round(r2_bestsub_covid[1], 2)`, 95% CI [`r round(r2_bestsub_covid[3], 2)`, `r round(r2_bestsub_covid[4], 2)`] and an RMSE = `r round(summary_fit_bestsub_covid["sigma", 1], 2)`, 95% CI [`r round(summary_fit_bestsub_covid["sigma", 3], 2)`, `r round(summary_fit_bestsub_covid["sigma", 4], 2)`] (for details, see Supplementary material). 
+
+
+## Overall belief
+
+```{r, echo=FALSE}
+# overall belief, political data, 13 predictors
+fit_ob_ref_pol <- targets::tar_read(fit_reference_ovallbelief_pol)
+r2_ob_ref_pol <- bayes_R2(fit_ob_ref_pol)
+a <- brms::fixef(fit_ob_ref_pol) 
+# get sigma
+sum_fit_ob_13_pol <- summary(fit_ob_ref_pol)
+summary_fit_ob_13_pol <- rbind(
+  data.frame(sum_fit_ob_13_pol$fixed), data.frame(sum_fit_ob_13_pol$spec_pars) 
+)
+colnames(summary_fit_ob_13_pol) <- 
+  c("mean", "SE", "lower bound", "upper bound", "Rhat", "Bulk_ESS", "Tail_ESS")
+```
+
+```{r, echo=FALSE}
+# overall belief,  political data, 3 predictors
+fit_ob_sub_pol <- targets::tar_read(fit_overallbelief_subset_pol)
+r2_ob_sub_pol <- bayes_R2(fit_ob_sub_pol)
+b <- brms::fixef(fit_ob_sub_pol) 
+# get sigma
+sum_fit_ob_sub_pol <- summary(fit_ob_sub_pol)
+summary_fit_ob_sub_pol <- rbind(
+  data.frame(sum_fit_ob_sub_pol$fixed), data.frame(sum_fit_ob_sub_pol$spec_pars) 
+)
+colnames(summary_fit_ob_sub_pol) <- 
+  c("mean", "SE", "lower bound", "upper bound", "Rhat", "Bulk_ESS", "Tail_ESS")
+```
+
+The predictive projection technique described above was also used for the overall belief dependent variable. First, a Bayesian penalized regression model with all the covariates was constructed as the reference model by using the political news data set. For such reference model, Bayesian $R^2$ = `r round(r2_ob_ref_pol[1], 2)`, 95% CI [`r round(r2_ob_ref_pol[3], 2)`, `r round(r2_ob_ref_pol[4], 2)`] and an RMSE = `r round(summary_fit_ob_13_pol["sigma", 1], 2)`, 95% CI [`r round(summary_fit_ob_13_pol["sigma", 3], 2)`, `r round(summary_fit_ob_13_pol["sigma", 4], 2)`]. The 95% CI did not cross the zero for three covariates: FNVS-Paranormal beliefs, `r round(a["para", 1], 2)`, 95% CI [`r round(a["para", 3], 2)`, `r round(a["para", 4], 2)`], FNVS-Critical news consumption, `r round(a["crit", 1], 2)`, 95% CI [`r round(a["crit", 3], 2)`, `r round(a["crit", 4], 2)`], and FNVS-Confirmation bias, `r round(a["conf", 1], 2)`, 95% CI [`r round(a["conf", 3], 2)`, `r round(a["conf", 4], 2)`].
+
+Second, by using a forward stepwise addition procedure (_i.e._, by decreasing the Kullback–Leibler divergence from the reference model to the projected submodel), we identified the minimal subset of these covariates which had similar predictive power as the reference model. For such submodel, Bayesian $R^2$ = `r round(r2_ob_sub_pol[1], 2)`, 95% CI [`r round(r2_ob_sub_pol[3], 2)`, `r round(r2_ob_sub_pol[4], 2)`] and an RMSE = `r round(summary_fit_ob_sub_pol["sigma", 1], 2)`, 95% CI [`r round(summary_fit_ob_sub_pol["sigma", 3], 2)`, `r round(summary_fit_ob_sub_pol["sigma", 4], 2)`]. The only covariate included in the projected model was FNVS-Confirmation bias, $\beta$ = `r round(b["conf", 1], 2)`, 95% CI [`r round(b["conf", 3], 2)`, `r round(b["conf", 4], 2)`]. 
+
+
+```{r, echo=FALSE}
+# overall belief, COVID-19 data, 3 predictors
+fit_ob_sub_covid <- targets::tar_read(fit_overallbelief_subset_covid)
+r2_ob_sub_covid <- bayes_R2(fit_ob_sub_covid)
+coefs3 <- brms::fixef(fit_ob_sub_covid) 
+# get sigma
+sum_fit_ob_sub_covid <- summary(fit_ob_sub_covid)
+summary_fit_ob_sub_covid <- rbind(
+  data.frame(sum_fit_ob_sub_covid$fixed), data.frame(sum_fit_ob_sub_covid$spec_pars) 
+)
+colnames(summary_fit_ob_sub_covid) <- 
+  c("mean", "SE", "lower bound", "upper bound", "Rhat", "Bulk_ESS", "Tail_ESS")
+```
+
+Third, the selected covariate was tested on the COVID-19 data set. The cross-validation with the COVID-19 data set (with FNVS-Confirmation bias as the only covariate, $\beta$ = `r round(coefs3["conf", 1], 2)`, 95% CI [`r round(coefs3["conf", 3], 2)`, `r round(coefs3["conf", 4], 2)`]), produced a Bayesian $R^2$ = `r round(r2_ob_sub_covid[1], 2)`, 95% CI [`r round(r2_ob_sub_covid[3], 2)`, `r round(r2_ob_sub_covid[4], 2)`] and an RMSE = `r round(summary_fit_ob_sub_covid["sigma", 1], 2)`, 95% CI [`r round(summary_fit_ob_sub_covid["sigma", 3], 2)`, `r round(summary_fit_ob_sub_covid["sigma", 4], 2)`]. 
+
+
+```{r, echo=FALSE}
+# overall belief, COVID-19 data, 13 predictors
+fit_ob_ref_covid <- targets::tar_read(fit_reference_ovallbelief_covid)
+r2_ob_ref_covid <- bayes_R2(fit_ob_ref_covid)
+coefs5 <- brms::fixef(fit_ob_ref_covid) 
+# get sigma
+sum_fit_ob_13_covid <- summary(fit_ob_ref_covid)
+summary_fit_ob_13_covid <- rbind(
+  data.frame(sum_fit_ob_13_covid$fixed), data.frame(sum_fit_ob_13_covid$spec_pars) 
+)
+colnames(summary_fit_ob_13_covid) <- 
+  c("mean", "SE", "lower bound", "upper bound", "Rhat", "Bulk_ESS", "Tail_ESS")
+```
+
+```{r, echo=FALSE}
+# overall belief, COVID-19 data, best subset
+fit_ob_best_covid <- targets::tar_read(fit_overallbelief_best_subset_covid)
+r2_ob_best_covid <- bayes_R2(fit_ob_best_covid)
+coefs6 <- brms::fixef(fit_ob_best_covid) 
+# get sigma
+sum_fit_ob_best_covid <- summary(fit_ob_best_covid)
+summary_fit_ob_best_covid <- rbind(
+  data.frame(sum_fit_ob_best_covid$fixed), data.frame(sum_fit_ob_best_covid$spec_pars) 
+)
+colnames(summary_fit_ob_best_covid) <- 
+  c("mean", "SE", "lower bound", "upper bound", "Rhat", "Bulk_ESS", "Tail_ESS")
+```
+
+For comparison, the Bayesian $R^2$ of the full model of the COVID-19 data set (with 13 covariates) was `r round(r2_ob_ref_covid[1], 2)`, 95% CI [`r round(r2_ob_ref_covid[3], 2)`, `r round(r2_ob_ref_covid[4], 2)`], and an RMSE = `r round(summary_fit_ob_13_covid["sigma", 1], 2)`, 95% CI [`r round(summary_fit_ob_13_covid["sigma", 3], 2)`, `r round(summary_fit_ob_13_covid["sigma", 4], 2)`], whereas the obtimal submodel (selected by ignoring the political news data) produced an $R^2$ of `r round(r2_ob_best_covid[1], 2)`, 95% CI [`r round(r2_ob_best_covid[3], 2)`, `r round(r2_ob_best_covid[4], 2)`], and an RMSE = `r round(summary_fit_ob_best_covid["sigma", 1], 2)`, 95% CI [`r round(summary_fit_ob_best_covid["sigma", 3], 2)`, `r round(summary_fit_ob_best_covid["sigma", 4], 2)`]. In conclusion, when considering overall belief, the performance measures of the cross-validation submodel (_i.e._, the model comprising the covariates selected from the political news data and applied to the COVID-19 data) are not within the uncertainty bound of the full model with 13 covariates. We interpret this result as indicating that response bias (_i.e._, overall belief) is affected in a different manner by psychological protective and vulnerability factors when the news have a direct personal relevance and when they have no immediate personal relevance (for details, see Supplementary material).
+
+
+## Media consumption habits
+
+In a multivariate Bayesian regression analysis, we examined the associations between truth discernment and overall belief (as dependent variables) and media consumption habits, as measured by 8 items describing the time weekly spent (1) reading newspapers, (2) listening to the news on the radio, (3) watching news programs on television, (4) reading news online, (5) listening to news podcasts, (6) watching online news videos, (7) commenting news with friends, and (8) sharing news on social media. The news category (political news versus COVID-19 news) was coded as a dummy variable interacting with the judgments on the 8 items listed before. The comparison between the model including the interaction tems and the model without interactions indicated was carried out via leave-one-out cross validation as implemented in the `loo` package [@loo_2017] and revealed that the difference between the two models (elpd difference = -6.7) was modest and not substantial (standard error = 4.3). In the no-interaction model, truth discernment was higher for political news, $\beta$ = 0.66, 95% CI  [0.55, 0.77]. Truth discernment improved with the time watching news programs on television, $\beta$ = 0.12, 95% CI [0.06, 0.18], reading news online, $\beta$ = 0.14, 95% CI [0.07, 0.20], and decreased with sharing news on social media, $\beta$ = -0.09, 95% CI [-0.15,-0.02]. Overall belief was higher for political news, $\beta$ = 0.13, 95% CI [0.02, 0.25] and increased with the time watching news programs on television, $\beta$ = 0.10, 95% CI [0.04, 0.17], with the time spent reading news online, $\beta$ = 0.07, 95% CI [0.00, 0.14], and decreased with the time spent watching online news videos, $\beta$ = -0.09, 95% CI [-0.17, -0.02]. In conclusion, we did not find any robust evidence of different media consumption habits for news that have a direct personal relevance and news having only indirectly personal relevance.  
+
+
+
+# Discussion
+
+
+
+## Conclusion {#conclusion}
+
+
+
+\newpage
+
+```{r render_appendix, include=FALSE}
+render_appendix("appendix.Rmd")
+```
+
+# References
+
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+
+```{r create_r-references}
+r_refs(file = here("fakenews.bib"))
+```
+
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+\setlength{\parskip}{8pt}
+
+
+
+
+<!-- The predictive projection technique described above was also used for the overall belief dependent variable. First, a Bayesian penalized regression model with all the covariates for the political-news data set was constructed as the reference model. Second, by using a forward stepwise addition procedure (_i.e._, by decreasing the Kullback–Leibler divergence from the reference model to the projected submodel), we identified the minimal subset of these covariates which had similar predictive power as the reference model.  -->
+<!-- with the minimal subset of these covariates which had similar predictive power as the reference model -->
+
+<!-- with the minimal subset of these covariates which had similar predictive power as the reference model produced a Bayesian -->
+
+
+
+
+
+

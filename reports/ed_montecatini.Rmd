@@ -1,0 +1,237 @@
+---
+title             : "Anorexia nervosa entails domain specific impairment of adaptive learning under uncertainty"
+shorttitle        : "Domain specific impairment of learning"
+author:
+  - name          : "Corrado Caudek"
+    affiliation   : "1"
+    corresponding : yes
+    email         : "corrado.caudek@unifi.it"
+  - name          : "Claudio Sica"
+    affiliation   : "3"
+  - name          : "Francesco Ceccarini"
+    affiliation   : "1"
+  - name          : "Ilaria Colpizzi"
+    affiliation   : "2"
+  - name          : "Virginia Alfei"
+    affiliation   : "2"
+affiliation:
+  - id            : "1"
+    institution   : "Department of General Psychology, University of Padova, Italy"
+  - id            : "2"
+    institution   : "NEUROFARBA Department, Psychology Section, University of Florence, Italy"
+  - id            : "3"
+    institution   : "Health Sciences Department, Psychology Section, University of Florence, Italy"
+abstract: |
+  The abstract.
+bibliography      : ["ed.bib"]
+linenumbers       : no
+linkcolor         : "blue"
+mask              : no
+draft             : no
+floatsintext      : yes
+csl               : "apa-with-abstract.csl"
+classoption       : "man"
+figsintext        : true
+numbersections    : false
+encoding          : UTF-8
+output            :
+  papaja::apa6_pdf:
+    includes:
+      after_body: "appendix.tex"
+    latex_engine: "xelatex"
+    extra_dependencies: ["xcolor"]
+editor_options: 
+  chunk_output_type: inline
+  markdown: 
+    wrap: sentence
+header-includes:
+   - \usepackage{apacite}
+   - \usepackage{amsmath}
+   - \usepackage[T1]{fontenc}
+   - \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+   - \usepackage{setspace}\doublespacing
+   - \usepackage{float}
+   - \floatplacement{figure}{H}
+   - \floatplacement{table}{H}
+   - \usepackage[font=small,skip=12pt]{caption}  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+```{r packages-data, cache = FALSE, include = FALSE}
+library("here")
+library("tidyverse") # for data manipulation
+library("knitr") # for formatting tables
+library("kableExtra") # for formatting tables even more
+library("patchwork") # for combining plots
+library("khroma") # for color palettes
+library("papaja")
+library("viridis")
+
+theme_set(theme_minimal())
+colors <- c("#007ab1", "#da61b2", "#ff8a0e")
+colors3 <- colour("bright")(3)
+colors7 <- colour("bright")(7)
+# theme_set(theme_apa())
+
+
+# model_list_1_flat <- readRDS("../replication/4_summarise_model_output/model_list_1_flat.rds") %>%
+#   mutate(type_trend = plyr::mapvalues(type_trend, 
+#                                       c("strong", "medium", "weak"),
+#                                       c("Low \nfrequency", "Medium \nfrequency", "High \nfrequency")),
+#          type_trend = factor(type_trend, 
+#                              levels = c("Low \nfrequency", "Medium \nfrequency", "High \nfrequency")),
+#          type_data = plyr::mapvalues(type_data, c("full", "sparse"), c("Full data", "Sparse data")),
+#          type_person_sd = plyr::mapvalues(type_person_sd, c("0sd", "12sd"), c("BPV = 0", "BPV = 1.2")),
+#          type_time_model = plyr::mapvalues(type_time_model, c("ar", "gp", "spline"), c("AR", "GP", "TPS")))
+# 
+# model_list_3_flat <- readRDS("../replication/4_summarise_model_output/model_list_3_flat.rds") %>%
+#   mutate(type_trend = plyr::mapvalues(type_trend, 
+#                                       c("strong", "medium", "weak"),
+#                                       c("Low \nfrequency", "Medium \nfrequency", "High \nfrequency")),
+#          type_trend = factor(type_trend, 
+#                              levels = c("Low \nfrequency", "Medium \nfrequency", "High \nfrequency")),
+#          type_person_sd = plyr::mapvalues(type_person_sd, c("0sd", "12sd"), c("BPV = 0", "BPV = 1.2")),
+#          type_time_model = plyr::mapvalues(type_time_model, c("ar", "gp", "spline"), c("AR", "GP", "TPS")))
+
+```
+
+
+```{r packages, cache = FALSE, include = FALSE}
+# suppressPackageStartupMessages(library("here"))
+# suppressPackageStartupMessages(library("knitr"))
+# suppressPackageStartupMessages(library("papaja"))
+# suppressPackageStartupMessages(library("tidyverse"))
+# suppressPackageStartupMessages(library("lavaan"))
+# suppressPackageStartupMessages(library("brms"))
+# suppressPackageStartupMessages(library("projpred"))
+# library("ggthemes")
+# suppressPackageStartupMessages(library("viridis"))
+# library("tidyr")
+# #suppressPackageStartupMessages(library("mice"))
+# suppressPackageStartupMessages(library("corrplot"))
+# suppressPackageStartupMessages(library("bayesplot"))
+# suppressPackageStartupMessages(library("semPlot"))
+# suppressPackageStartupMessages(library("rio"))
+# suppressPackageStartupMessages(library("gt"))
+# suppressPackageStartupMessages(library("glue"))
+# suppressPackageStartupMessages(library("kableExtra"))
+# theme_set(theme_apa())
+# # source(here("libraries", "self_compassion_fnc.R"))
+# # the_dir <- "/Users/corrado/Dropbox/papers/self_compassion/scripts/_mplus/"
+```
+
+```{r}
+r_refs(file = "r-references.bib")
+my_citation <- cite_r(file = "r-references.bib")
+```
+
+# Introduction
+
+
+https://doi.org/10.1007/s40167-018-0068-0
+
+To explore the processes underpinning task performance, computational modeling (i.e., drift diffusion model (DDM) analysis) will be used to explicate the specific processes by means of which domain specificigy influences decision-making (e.g., Golubickis et al. 2017, 2018; Macrae et al. 2017). In any task context, there are two distinct ways in which decisional processing can be biased. These pertain to how a stimulus is processed and how a response is generated, with each source of bias reflecting a different underlying component of decisional processing (Voss et al. 2004, 2013; White and Poldrack 2014). Whereas variability in stimulus processing affects the quality of information gathering during decision-making (i.e., dynamic stimulus bias), adjustments in response preparation influence how much evidence is required before a specific judgment is made (i.e., prior or pre-decisional bias). The theoretical value of a DDM analysis resides in its ability to isolate these independent forms of bias, thereby elucidate the component processes that underpin decision-making (Ratcliff 1978; Ratcliff and Rouder 1998; Ratcliff et al. 2016; Voss et al. 2004, 2013; Wagenmakers 2009). 
+
+The DDM assumes that, during binary decision-making (e.g., owned-by-self vs. owned-by-other), noisy information is continuously sampled until sufficient evidence is acquired to initiate a response (see Fig. 1 for a schematic representation of the model). The duration of the diffusion process is known as the decision time, and the process itself can be characterized by several important parameters. Drift rate (v) estimates the speed of information gathering (i.e., larger drift rate = faster information uptake), thus is interpreted as a measure of the quality of visual processing during decision-making (White and Poldrack 2014). Boundary separa- tion (a) estimates the distance between the two decision thresholds (i.e., self-owned vs. other-owned), hence indicates how much evidence is required before a response is made (i.e., larger (smaller) values indicate more conservative (liberal) respond- ing). The starting point (z) defines the position between the decision thresholds at which evidence accumulation begins. If z is not centered between the thresholds (i.e., z = 0.5), this denotes an a priori bias in favor of the response that is closer to the starting point (White and Poldrack 2014). In other words, less evidence is required to reach the preferred (vs. non-preferred) threshold. Finally, the duration of all non-decisional processes is given by the additional parameter t0, which is taken to indicate biases in stimulus encoding and response execution (Voss et al. 2010).
+
+
+# Methods
+
+
+
+## Participants
+
+
+
+## Material
+
+
+
+## Procedure
+
+Participants who completed the first administration were prevented to be part of the second sample. 
+
+
+## Data analysis
+
+Data cleaning, manipulation, and analyses were performed in R program version 4.1.0 [@R-base]. Descriptive analyses were facilitated by `tidyverse` package [@R-tidyverse]. Bayesian modeling to assess the associations between the truth discernment and overall belief and the available covariates was performed in Rstudio using Stan and associated packages. Bayesian regression models were fitted using the `brms` package [@R-brms_b]. Markov chain Monte Carlo diagnostics for the final model were performed with (a) the potential scale reduction statistic ($\hat{R}$), (b) the ratio of the effective sample size to the total sample size drawn from the posterior distribution, and (c) trace plots of Markov chain Monte Carlo generated through the `bayesplot` package. Residual check and posterior predictive checks were also performed using the `bayesplot` package. The highest density interval of the posterior distribution was estimated using the `bayestestR` package.
+
+Belief in Fake News was assessed by two common measures [@pennycook2021psychology]: truth discernment and overall belief. Truth discernment was computed as the degree of belief in True News minus the degree of belief in Fake News.Truth discernment is akin to the sensitivity measure ($d'$) of the Signal Detection Theory [SDT; @green1966signal]. In our sample, we found a correlation of `r 0.98` between truth discernment and $d'$. The $d'$ index was computed by using a multilevel Bayesian ordinal regression to fit a hierarchical unequal variance SDT model to the participants' ratings of the news headlines, with clustering (_i.e._, random effects) on the levels of participants and items. Overall belief was computed as the sum of the degrees of belief in True News and Fake News (without distinguishing between them). This second index is akin to SDT 'bias'.  Prior to analysis, all continuous regression inputs were standardized to have a mean of 0 and a standard deviation of 1. As the values for predictors and the response were standardized, a weakly informative normal(0, 1) priors was used for the predictor slopes and intercept. Similarly, a weakly informative Cauchy(0, 1) prior was used for the model standard deviation (sigma). 
+
+The question of whether individuals show a similar vulnerability to Fake News when dealing with issues that have a strong direct personal relevance (such as the news about Covid-19), or with issues that have only a weak and indirect personal relevance (such as political news that do not have an immediate impact on the every-day life of the participant) was framed within the statistical problem of finding the optimal subset of the predictors that can maximally predict an outcome measure and that can optimally generalize to new, out-of-sample data. 
+
+Statistical techniques as stepwise selection, which is based on _p_-values criterion or information criteria such as the AIC or BIC, or machine learning methods such as LASSO, in which the predictor slopes are continuously increased towards their least-squares solution, suffer from the problem of over-fitting. Because of over-fitting, models obtained with the previously mentioned techniques tend to provide a very good explain the data at hand (e.g., high $R^2$, low RMSE), but their performance does not generalize and perform poorly when faced with new data. For such models, moreover, _p_-values and confidence intervals  are invalid because they are computed by ignoring the selection procedure. 
+
+The problem of finding the best predictors subset has recently found a new solution within a Bayesian framework in terms of the Predictive projection feature selection method [@piironen2020projective]. At the first step, a reference model is fitted using all available predictors. At the second step, smaller submodels are fitted to approximate the reference model's predictions, using projection. The covariates in the best model for each submodel size are identified by decreasing the Kullback–Leibler divergence from the reference model to the projected submodel using a forward stepwise addition. The procedure selects the submodel with the smallest number of predictors which has similar predictive power as the reference model, judged by the mean log predictive density and the root mean square error. To avoid overfitting, at a third step the selected submodel is compared to the reference model on cross-validated prediction accuracy by using Pareto-smoothed importance sampling leave-one-out cross-validation (PSIS-LOO). 
+
+For covariate selection, the predictive projection technique proposed by Piironen et al. was applied to the political data set. Then, cross validation was performed on the COVID-19 data set by using the optimal subset of predictors selected in the first step of the analysis. We reasoned as follows: If the best subset of predictors selected concerning the veracity judgments of political news does not reliably decrease predictive accuracy of a regression model applied to the veracity judgments of COVID-19 news, then we can safely conclude that Fake News vulnerability is not domain-specific (at least for the two extreme domains presently considered) in the sense that times of crisis, such that of the COVID-19 pandemic, affect susceptibility to misinformation in the similar manner as when the news have negligible personal relevance.
+
+## Decision process (DDM)
+
+RT and accuracy data were simultaneously fit to DDM using the HDDM Python toolbox which implements Bayesian estimation of parameters with literature-based priors (Wiecki et al., 2013), following a generative-node hierarchical tree structure. Critically, to quantify and test the impact of our experimental conditions on the decision process, we built linear models over each DDM parameter (v, a, t, z, and we also included the accumulation rate inter-trial variability (sv) to account for slow errors (Ratcliff & McKoon, 2008)). Because this was a hypothesis-driven approach, we defined a minimal model informed by theoretical constraints (Ratcliff & McKoon, 2008) with only main effects for each fixed factor, except music condition. Since music condition could affect evidence threshold or accumulation rate non-exclusively, we compared models in which we conditioned either none, each or both parameters on music condition, by computing the Deviance Information Criterion (DIC) for each model. Then, we selected the model that had the lowest DIC (i.e., best trade-off between the quality of fit and model complexity) (winning DDM). Model validation and hypothesis testing followed the same rationale as for decision outcomes’ GLMMs. We report the selected model specification with lme4-like syntax for clarity.
+
+
+# Results
+
+## Preliminary Analysis and Descriptive Statistics
+
+## Classification
+
+To estimate any potential advantage of the computational modeling approach, we trained two classifiers on disorder status. Both classifiers used individually-estimated DDM parameters but, in one case, the DDM parameters were obtained from the PRL task with neutral stimuli; in the other case, they were obtained from the PRL task with food stimuli. Importantly, these parameters were estimated from a model that did not have access to clinical status (i.e., all subjects were estimated with a single group distribution), to prevent classification bias that could otherwise arise due to shrinkage (an effect in hierarchical Bayesian model estimation where individual parameters can be estimated closer to the group mean). A logistic regression classifier was trained 100 times using 10-fold cross-validation. The best-performing classifier from the training was then used to iteratively predict diagnosis status on 30% of held-out data. The performance of the classifier was measured on held-out data using the Area Under the Receiver-Operator-Curve (AUC) statistic, which can be interpreted to measure the probability of correctly choosing two randomly drawn samples from each the two classes (ED and controls).
+
+
+
+## Classification of clinical status based on computational modeling
+
+
+
+
+
+# Discussion
+
+
+
+## Conclusion {#conclusion}
+
+
+
+\newpage
+
+```{r render_appendix, include=FALSE}
+# render_appendix("appendix.Rmd")
+```
+
+# References
+
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+
+```{r create_r-references}
+r_refs(file = here("fakenews.bib"))
+```
+
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+\setlength{\parskip}{8pt}
+
+
+
+
+<!-- The predictive projection technique described above was also used for the overall belief dependent variable. First, a Bayesian penalized regression model with all the covariates for the political-news data set was constructed as the reference model. Second, by using a forward stepwise addition procedure (_i.e._, by decreasing the Kullback–Leibler divergence from the reference model to the projected submodel), we identified the minimal subset of these covariates which had similar predictive power as the reference model.  -->
+<!-- with the minimal subset of these covariates which had similar predictive power as the reference model -->
+
+<!-- with the minimal subset of these covariates which had similar predictive power as the reference model produced a Bayesian -->
+
+
+
+
+
+

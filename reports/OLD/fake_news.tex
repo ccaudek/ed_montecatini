@@ -1,0 +1,558 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+%
+\documentclass[
+  english,
+  man,floatsintext]{apa6}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Individual differences in judging the truthworthiness of Fake News about Covid-19},
+  pdfauthor={Pasquale Capuozzo1, Laura Giuntoli1, Francesco Ceccarini1, Ilaria Colpizzi2, Virginia Alfei2, Claudio Sica3, \& Corrado Caudek2},
+  pdflang={en-EN},
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=Maroon,
+  citecolor=Blue,
+  urlcolor=Blue,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+% Manuscript styling
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+% Table formatting
+\usepackage{longtable}
+\usepackage{lscape}
+% \usepackage[counterclockwise]{rotating}   % Landscape page setup for large tables
+\usepackage{multirow}		% Table styling
+\usepackage{tabularx}		% Control Column width
+\usepackage[flushleft]{threeparttable}	% Allows for three part tables with a specified notes section
+\usepackage{threeparttablex}            % Lets threeparttable work with longtable
+
+% Create new environments so endfloat can handle them
+% \newenvironment{ltable}
+%   {\begin{landscape}\begin{center}\begin{threeparttable}}
+%   {\end{threeparttable}\end{center}\end{landscape}}
+\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+
+% Enables adjusting longtable caption width to table width
+% Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+% \setlength{\parindent}{0.5in}
+% \setlength{\parskip}{0pt plus 0pt minus 0pt}
+
+% Overwrite redefinition of paragraph and subparagraph by the default LaTeX template
+% See https://github.com/crsh/papaja/issues/292
+\makeatletter
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries\itshape\typesectitle}}
+
+\renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-\z@\relax}%
+  {\normalfont\normalsize\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
+\makeatother
+
+% \usepackage{etoolbox}
+\makeatletter
+\patchcmd{\HyOrg@maketitle}
+  {\section{\normalfont\normalsize\abstractname}}
+  {\section*{\normalfont\normalsize\abstractname}}
+  {}{\typeout{Failed to patch abstract.}}
+\patchcmd{\HyOrg@maketitle}
+  {\section{\protect\normalfont{\@title}}}
+  {\section*{\protect\normalfont{\@title}}}
+  {}{\typeout{Failed to patch title.}}
+\makeatother
+\shorttitle{Psychological vulnerability to Fake News}
+\usepackage{lineno}
+
+\linenumbers
+\usepackage{csquotes}
+\usepackage{rotating}
+\DeclareDelayedFloatFlavor{sidewaysfigure}{figure}
+\DeclareDelayedFloatFlavor{sidewaystable}{table}
+\usepackage{pdflscape}
+\DeclareDelayedFloatFlavor{landscape}{table}
+\raggedbottom
+\usepackage{xcolor,makecell,array}
+\usepackage{graphicx}
+\setlength{\parskip}{0pt plus 0pt minus 0pt}
+\usepackage{multirow}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{color, colortbl}
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[fileext=los, listname=List of Schemes, name=Listing, placement=!htbp, within=section]{listing}
+\usepackage{placeins}
+\ifxetex
+  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{english}
+\else
+  \usepackage[main=english]{babel}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\fi
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\title{Individual differences in judging the truthworthiness of Fake News about Covid-19}
+\author{Pasquale Capuozzo\textsuperscript{1}, Laura Giuntoli\textsuperscript{1}, Francesco Ceccarini\textsuperscript{1}, Ilaria Colpizzi\textsuperscript{2}, Virginia Alfei\textsuperscript{2}, Claudio Sica\textsuperscript{3}, \& Corrado Caudek\textsuperscript{2}}
+\date{}
+
+
+\authornote{
+
+Correspondence concerning this article should be addressed to Corrado Caudek. E-mail: \href{mailto:corrado.caudek@unifi.it}{\nolinkurl{corrado.caudek@unifi.it}}
+
+}
+
+\affiliation{\vspace{0.5cm}\textsuperscript{1} Department of General Psychology, University of Padova, Italy\\\textsuperscript{2} NEUROFARBA Department, Psychology Section, University of Florence, Italy\\\textsuperscript{3} Health Sciences Department, Psychology Section, University of Florence, Italy}
+
+\abstract{
+The massive spread of fake news about COVID-19 made necessary a deeper understanding of both risk and protective psychological factors, making people more or less prone to fall for misinformation. Prior studies on individual differences in susceptibility to fake news have mostly dealt with events that do not bear any direct personal relevance to the subject. The Elaboration Likelihood Model (ELM) predicts that high personal involvement should increase the ability of correctly discriminating between fake news and true news. Therefore, we expect that, in a situation like a worldwide pandemic, individuals should be less likely to be influenced by risk factors in trusting fake news. The present study was conducted during the first national lockdown in Italy, between March and May 2020, when the personal involvement was very high. Here we tested 700 participants on the ability to discriminate fake news from true news about COVID-19, and we also measured several psychological risk and protective factors. Contrarily to the ELM predictions, we found that the psychological risk factors outweighed the protective factors, which indicates the presence of widespread beliefs in fake news about COVID-19. These results are relevant for policymakers planning social interventions about COVID-19 containment.
+}
+
+
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+\hypertarget{methods}{%
+\section{Methods}\label{methods}}
+
+\hypertarget{participants}{%
+\subsection{Participants}\label{participants}}
+
+\hypertarget{material}{%
+\subsection{Material}\label{material}}
+
+\hypertarget{procedure}{%
+\subsection{Procedure}\label{procedure}}
+
+Participants who completed the first administration were prevented to be part of the second sample.
+
+\hypertarget{data-analysis}{%
+\subsection{Data analysis}\label{data-analysis}}
+
+Data cleaning, manipulation, and analyses were performed in R program version 4.1.0 (R Core Team, 2020). Descriptive analyses were facilitated by \texttt{tidyverse} package (Wickham et al., 2019). Bayesian modeling to assess the associations between the truth discernment and overall belief and the available covariates was performed in Rstudio using Stan and associated packages. Bayesian regression models were fitted using the \texttt{brms} package (Bürkner, 2018). Markov chain Monte Carlo diagnostics for the final model were performed with (a) the potential scale reduction statistic (\(\hat{R}\)), (b) the ratio of the effective sample size to the total sample size drawn from the posterior distribution, and (c) trace plots of Markov chain Monte Carlo generated through the \texttt{bayesplot} package. Residual check and posterior predictive checks were also performed using the \texttt{bayesplot} package. The highest density interval of the posterior distribution was estimated using the \texttt{bayestestR} package.
+
+Belief in Fake News was assessed by two common measures (Pennycook \& Rand, 2021): truth discernment and overall belief. Truth discernment was computed as the degree of belief in True News minus the degree of belief in Fake News.Truth discernment is akin to the sensitivity measure (\(d'\)) of the Signal Detection Theory {[}SDT; Green et al. (1966){]}. In our sample, we found a correlation of 0.98 between truth discernment and \(d'\). The \(d'\) index was computed by using a multilevel Bayesian ordinal regression to fit a hierarchical unequal variance SDT model to the participants' ratings of the news headlines, with clustering (\emph{i.e.}, random effects) on the levels of participants and items. Overall belief was computed as the sum of the degrees of belief in True News and Fake News (without distinguishing between them). This second index is akin to SDT `bias.' Prior to analysis, all continuous regression inputs were standardized to have a mean of 0 and a standard deviation of 1. As the values for predictors and the response were standardized, a weakly informative normal(0, 1) priors was used for the predictor slopes and intercept. Similarly, a weakly informative Cauchy(0, 1) prior was used for the model standard deviation (sigma).
+
+The question of whether individuals show a similar vulnerability to Fake News when dealing with issues that have a strong direct personal relevance (such as the news about Covid-19), or with issues that have only a weak and indirect personal relevance (such as political news that do not have an immediate impact on the every-day life of the participant) was framed within the statistical problem of finding the optimal subset of the predictors that can maximally predict an outcome measure and that can optimally generalize to new, out-of-sample data.
+
+Statistical techniques as stepwise selection, which is based on \emph{p}-values criterion or information criteria such as the AIC or BIC, or machine learning methods such as LASSO, in which the predictor slopes are continuously increased towards their least-squares solution, suffer from the problem of over-fitting. Because of over-fitting, models obtained with the previously mentioned techniques tend to provide a very good explain the data at hand (e.g., high \(R^2\), low RMSE), but their performance does not generalize and perform poorly when faced with new data. For such models, moreover, \emph{p}-values and confidence intervals are invalid because they are computed by ignoring the selection procedure.
+
+The problem of finding the best predictors subset has recently found a new solution within a Bayesian framework in terms of the Predictive projection feature selection method (Piironen et al., 2020). At the first step, a reference model is fitted using all available predictors. At the second step, smaller submodels are fitted to approximate the reference model's predictions, using projection. The covariates in the best model for each submodel size are identified by decreasing the Kullback--Leibler divergence from the reference model to the projected submodel using a forward stepwise addition. The procedure selects the submodel with the smallest number of predictors which has similar predictive power as the reference model, judged by the mean log predictive density and the root mean square error. To avoid overfitting, at a third step the selected submodel is compared to the reference model on cross-validated prediction accuracy by using Pareto-smoothed importance sampling leave-one-out cross-validation (PSIS-LOO).
+
+For covariate selection, the predictive projection technique proposed by Piironen et al.~was applied to the political data set. Then, cross validation was performed on the COVID-19 data set by using the optimal subset of predictors selected in the first step of the analysis. We reasoned as follows: If the best subset of predictors selected concerning the veracity judgments of political news does not reliably decrease predictive accuracy of a regression model applied to the veracity judgments of COVID-19 news, then we can safely conclude that Fake News vulnerability is not domain-specific (at least for the two extreme domains presently considered) in the sense that times of crisis, such that of the COVID-19 pandemic, affect susceptibility to misinformation in the similar manner as when the news have negligible personal relevance.
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+\hypertarget{preliminary-analysis-and-descriptive-statistics}{%
+\subsection{Preliminary Analysis and Descriptive Statistics}\label{preliminary-analysis-and-descriptive-statistics}}
+
+\hypertarget{truth-discernment}{%
+\subsection{Truth discernment}\label{truth-discernment}}
+
+First, we fitted a Bayesian multiple regression reference model predicting truth discernment from 13 candidate predictors. Second, we used predictive projection to find the smallest possible submodel that would predict truth discernment almost as well as the reference model. Predictive projection was implemented by using the \texttt{projpred} package. The covariates were entered into the submodels using \texttt{forward} search and the submodels' predictive performance was evaluated using the expected log predictive density (ELPD) obtained through the Pareto-smoothed importance sampling leave-one-out cross-validation. For the optimal submodel, we chose the smallest submodel having an ELPD within 1 standard error of the reference model. To evaluate the models' performance, we used Bayesian \(R^2 = \frac{\text{Var}_{\text{fit}}}{\text{Var}_{\text{fit}} + \text{Var}_{\text{res}}}\). Bayesian \(R^2\) is a generalization of traditional \(R^2\), but has the advantage of incorporating posterior uncertainty while always remaining bounded below 1. Bayesian \(R^2\) was used as a summary of predictive performance for comparing (a) between the reference and the projected models estimated on the political data set, and (b) across models estimated on different data sets (political news and COVID-19 news).
+
+
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{/Users/corrado/Documents/papers/fakenews/figs/r2_comp_pol} 
+
+}
+
+\caption{Bayesian \(R^2\) of the reference model (13 predictors) for the political news data set and \(R^2\) of the projected submodel (7 predictors), both showing 95\% CI).}\label{fig:figr2refprojpol}
+\end{figure}
+
+\begin{table}[H]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:tablerefpol}Posterior mean, standard error, 95\% credible interval and $\hat{R}$
+    statistic for each parameter of the model predicting political news truth discernment.}
+
+\small{
+
+\begin{tabular}{cccccc}
+\toprule
+parameter & \multicolumn{1}{c}{mean} & \multicolumn{1}{c}{SE} & \multicolumn{1}{c}{lower bound} & \multicolumn{1}{c}{upper bound} & \multicolumn{1}{c}{Rhat}\\
+\midrule
+Intercept & 0.708 & 0.095 & 0.522 & 0.892 & 1.000\\
+age & 0.121 & 0.041 & 0.041 & 0.201 & 1.000\\
+agsu & 0.019 & 0.082 & -0.143 & 0.180 & 1.000\\
+conv & -0.250 & 0.073 & -0.393 & -0.108 & 1.000\\
+miis & -0.210 & 0.054 & -0.318 & -0.104 & 1.000\\
+rfsp & -0.074 & 0.060 & -0.193 & 0.044 & 1.000\\
+rfsn & 0.052 & 0.054 & -0.052 & 0.157 & 1.000\\
+educ & 0.101 & 0.038 & 0.026 & 0.175 & 1.000\\
+poli & 0.232 & 0.040 & 0.153 & 0.311 & 1.000\\
+spir & 0.098 & 0.052 & -0.003 & 0.199 & 1.000\\
+para & 0.017 & 0.046 & -0.075 & 0.107 & 1.000\\
+crit & 0.136 & 0.039 & 0.060 & 0.212 & 1.000\\
+cosp & -0.244 & 0.047 & -0.336 & -0.153 & 1.000\\
+supe & 0.016 & 0.046 & -0.073 & 0.105 & 1.000\\
+simp & -0.053 & 0.043 & -0.136 & 0.031 & 1.000\\
+conf & -0.109 & 0.040 & -0.187 & -0.030 & 1.000\\
+rese & 0.098 & 0.040 & 0.021 & 0.175 & 1.000\\
+sex & 0.297 & 0.078 & 0.145 & 0.449 & 1.000\\
+sigma & 0.782 & 0.025 & 0.735 & 0.834 & 1.000\\
+\bottomrule
+\end{tabular}
+
+}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\begin{table}[H]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:tablesubpol}Posterior mean, standard error, 95\% credible interval and $\hat{R}$
+    statistic for each parameter of the projection model predicting political news truth discernment.}
+
+\small{
+
+\begin{tabular}{cccccc}
+\toprule
+parameter & \multicolumn{1}{c}{mean} & \multicolumn{1}{c}{SE} & \multicolumn{1}{c}{lower bound} & \multicolumn{1}{c}{upper bound} & \multicolumn{1}{c}{Rhat}\\
+\midrule
+Intercept & 0.679 & 0.076 & 0.528 & 0.829 & 1.000\\
+cosp & -0.208 & 0.043 & -0.291 & -0.124 & 1.000\\
+poli & 0.209 & 0.038 & 0.134 & 0.284 & 1.000\\
+miis & -0.206 & 0.048 & -0.301 & -0.112 & 1.000\\
+crit & 0.135 & 0.038 & 0.060 & 0.209 & 1.000\\
+sex & 0.342 & 0.077 & 0.191 & 0.493 & 1.000\\
+conv & -0.245 & 0.066 & -0.377 & -0.113 & 1.000\\
+educ & 0.113 & 0.037 & 0.040 & 0.185 & 1.000\\
+sigma & 0.796 & 0.026 & 0.748 & 0.848 & 1.000\\
+\bottomrule
+\end{tabular}
+
+}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+On the political news data, the reference model (see Table \ref{tab:tablerefpol}) had a Bayesian \(R^2\) of 0.39, 95\% CI {[}0.33, 0.44{]} (see Figure \ref{fig:figr2refprojpol}) and a model standard deviation/RMSE of 0.78, 95\% CI {[}0.73, 0.83{]}, indicating a moderately good predictive performance. By using predictive projection, we selected the best submodel according to the 1 SE criterion. The projected model, which included only 7 covariates, produced a predictive performance that was similar to that of the reference model with all 13 covariates (Figure \ref{fig:figr2refprojpol}). On the political news data set, the 1SE-submodel had a Bayesian \(R^2\) of 0.35, 95\% CI {[}0.29, 0.40{]} and a model standard deviation/RMSE of 0.80, 95\% CI {[}0.75, 0.85{]}. The predicted values of the 1 SE-submodel were strongly associated with the predicted values of the reference model (Pearson r = 0.952 (see Figure \ref{fig:figr2subprojpol})). The seven predictors in the optimal submodel, in order as they were entered into the submodel, were: \ldots{}
+
+
+
+\begin{figure}
+
+{\centering \includegraphics[width=1.0\linewidth]{/Users/corrado/Documents/papers/fakenews/figs/varsel} 
+
+}
+
+\caption{Trajectories of the predictive projection feature selection and scatterplot of the predictions of the reference model versus the preditions of the optimal submodel. (a) Change in ELPD/decrease in RMSE as more predictors entered the submodel. (b) Truth discernment in political news judgment predicted by the reference model (13 predictors) as a function of the truth discernment predicted by the submodel (7 predictors); both predictions concerns the whole political news data set).}\label{fig:figr2subprojpol}
+\end{figure}
+
+\begin{table}[H]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:tablesubcovid}Posterior mean, standard error, 95\% credible interval and $\hat{R}$
+    statistic for each parameter of the projection model predicting COVID-19 news truth discernment.}
+
+\small{
+
+\begin{tabular}{cccccc}
+\toprule
+parameter & \multicolumn{1}{c}{mean} & \multicolumn{1}{c}{SE} & \multicolumn{1}{c}{lower bound} & \multicolumn{1}{c}{upper bound} & \multicolumn{1}{c}{Rhat}\\
+\midrule
+Intercept & -0.342 & 0.047 & -0.434 & -0.250 & 1.000\\
+cosp & -0.230 & 0.033 & -0.295 & -0.166 & 1.000\\
+poli & 0.043 & 0.032 & -0.020 & 0.106 & 1.000\\
+miis & -0.223 & 0.029 & -0.281 & -0.164 & 1.000\\
+crit & 0.165 & 0.029 & 0.107 & 0.222 & 1.000\\
+sex & 0.161 & 0.065 & 0.033 & 0.289 & 1.000\\
+conv & -0.128 & 0.049 & -0.224 & -0.032 & 1.000\\
+educ & 0.103 & 0.030 & 0.044 & 0.161 & 1.000\\
+sigma & 0.772 & 0.021 & 0.733 & 0.814 & 1.000\\
+\bottomrule
+\end{tabular}
+
+}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+The crucial point of the present statistical analysis is to evaluate by cross-validation the predictive performance of the selected submodel. The seven covariates selected from the political news data were used as predictors for truth discernment in the COVID-19 news data set. We found that the predictive performance of the selected submodel generalized well to the new data set: For the COVID-19 news data set, Bayesian \(R^2\) = 0.31, 95\% CI {[}0.26, 0.35{]} and an RMSE = 0.77, 95\% CI {[}0.73, 0.81{]} (see Fig. 3b). For the COVID-19 data, therefore, the performance measures of the submodel are well-within the uncertainty bounds of the submodel applied to the political news data set.
+
+Figure \ref{fig:coefsprojmodels} shows, for both the political news data set (panel A) and the COVID-19 news data set (panel B), the credible intervals for the seven predictors in the selected submodel. The pattern of results is very similar in the two cases, indicating that truth discernment is affected by psychological protective and vulnerability factors in a similar manner when the news have a direct personal relevance and when the news have no immediate personal relevance. Political orientation was the only dimension which differed in the two cases: Political orientation showed a facilitating effect for truth discernment in the case of the political news data, but not for the COVID-19 news data. We do not deem this difference to be surprising because opinions about COVID-19 were not strongly politically polarized in Italy -- differently from what happened in the United States, for example.
+
+
+
+\begin{figure}
+
+{\centering \includegraphics[width=1.0\linewidth]{/Users/corrado/Documents/papers/fakenews/figs/coefs} 
+
+}
+
+\caption{(A) Credible intervals for predictors in the submodel for the political news data set. (B) Credible intervals for predictors in the submodel for the COVID-19 data set generated by using the same predictors that had been selected in the training set (political news data). Inner shaded area = 80\% CI.}\label{fig:coefsprojmodels}
+\end{figure}
+
+For the COVID-19 news data set, the complete model with 13 covariates produced a Bayesian \(R^2\) = 0.36, 95\% CI {[}0.31, 0.40{]} and an RMSE = 0.75, 95\% CI {[}0.71, 0.79{]}. Note that, for the submodel comprising the 7 covariates selected from the political news data, the posterior performance measures (both the Bayesian \(R^2\) and the RMSE) are within the uncertainty bound of the full model with 13 covariates. As a further comparison, the optimal set of covariate selected by projection (ignoring the political news data) produced a Bayesian \(R^2\) = 0.33, 95\% CI {[}0.29, 0.38{]} and an RMSE = 0.76, 95\% CI {[}0.72, 0.80{]} (for details, see Supplementary material).
+
+\hypertarget{overall-belief}{%
+\subsection{Overall belief}\label{overall-belief}}
+
+The predictive projection technique described above was also used for the overall belief dependent variable. First, a Bayesian penalized regression model with all the covariates was constructed as the reference model by using the political news data set. For such reference model, Bayesian \(R^2\) = 0.10, 95\% CI {[}0.06, 0.15{]} and an RMSE = 1.02, 95\% CI {[}0.96, 1.08{]}. The 95\% CI did not cross the zero for three covariates: FNVS-Paranormal beliefs, 0.13, 95\% CI {[}0.01, 0.24{]}, FNVS-Critical news consumption, 0.10, 95\% CI {[}0, 0.20{]}, and FNVS-Confirmation bias, 0.21, 95\% CI {[}0.11, 0.31{]}.
+
+Second, by using a forward stepwise addition procedure (\emph{i.e.}, by decreasing the Kullback--Leibler divergence from the reference model to the projected submodel), we identified the minimal subset of these covariates which had similar predictive power as the reference model. For such submodel, Bayesian \(R^2\) = 0.04, 95\% CI {[}0.02, 0.08{]} and an RMSE = 1.02, 95\% CI {[}0.96, 1.08{]}. The only covariate included in the projected model was FNVS-Confirmation bias, \(\beta\) = 0.22, 95\% CI {[}0.13, 0.31{]}.
+
+Third, the selected covariate was tested on the COVID-19 data set. The cross-validation with the COVID-19 data set (with FNVS-Confirmation bias as the only covariate, \(\beta\) = 0.10, 95\% CI {[}0.03, 0.18{]}), produced a Bayesian \(R^2\) = 0.01, 95\% CI {[}0, 0.03{]} and an RMSE = 0.96, 95\% CI {[}0.92, 1.02{]}.
+
+For comparison, the Bayesian \(R^2\) of the full model of the COVID-19 data set (with 13 covariates) was 0.11, 95\% CI {[}0.08, 0.15{]}, and an RMSE = 0.93, 95\% CI {[}0.88, 0.98{]}, whereas the obtimal submodel (selected by ignoring the political news data) produced an \(R^2\) of 0.05, 95\% CI {[}0.02, 0.08{]}, and an RMSE = 0.95, 95\% CI {[}0.90, 1{]}. In conclusion, when considering overall belief, the performance measures of the cross-validation submodel (\emph{i.e.}, the model comprising the covariates selected from the political news data and applied to the COVID-19 data) are not within the uncertainty bound of the full model with 13 covariates. We interpret this result as indicating that response bias (\emph{i.e.}, overall belief) is affected in a different manner by psychological protective and vulnerability factors when the news have a direct personal relevance and when they have no immediate personal relevance (for details, see Supplementary material).
+
+\hypertarget{media-consumption-habits}{%
+\subsection{Media consumption habits}\label{media-consumption-habits}}
+
+In a multivariate Bayesian regression analysis, we examined the associations between truth discernment and overall belief (as dependent variables) and media consumption habits, as measured by 8 items describing the time weekly spent (1) reading newspapers, (2) listening to the news on the radio, (3) watching news programs on television, (4) reading news online, (5) listening to news podcasts, (6) watching online news videos, (7) commenting news with friends, and (8) sharing news on social media. The news category (political news versus COVID-19 news) was coded as a dummy variable interacting with the judgments on the 8 items listed before. The comparison between the model including the interaction tems and the model without interactions indicated was carried out via leave-one-out cross validation as implemented in the \texttt{loo} package (Vehtari et al., 2017) and revealed that the difference between the two models (elpd difference = -6.7) was modest and not substantial (standard error = 4.3). In the no-interaction model, truth discernment was higher for political news, \(\beta\) = 0.66, 95\% CI {[}0.55, 0.77{]}. Truth discernment improved with the time watching news programs on television, \(\beta\) = 0.12, 95\% CI {[}0.06, 0.18{]}, reading news online, \(\beta\) = 0.14, 95\% CI {[}0.07, 0.20{]}, and decreased with sharing news on social media, \(\beta\) = -0.09, 95\% CI {[}-0.15,-0.02{]}. Overall belief was higher for political news, \(\beta\) = 0.13, 95\% CI {[}0.02, 0.25{]} and increased with the time watching news programs on television, \(\beta\) = 0.10, 95\% CI {[}0.04, 0.17{]}, with the time spent reading news online, \(\beta\) = 0.07, 95\% CI {[}0.00, 0.14{]}, and decreased with the time spent watching online news videos, \(\beta\) = -0.09, 95\% CI {[}-0.17, -0.02{]}. In conclusion, we did not find any robust evidence of different media consumption habits for news that have a direct personal relevance and news having only indirectly personal relevance.
+
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
+\hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
+
+\newpage
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+\setlength{\parskip}{8pt}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\hypertarget{ref-R-brms_b}{}%
+Bürkner, P.-C. (2018). Advanced {Bayesian} multilevel modeling with the {R} package {brms}. \emph{The R Journal}, \emph{10}(1), 395--411. \url{https://doi.org/10.32614/RJ-2018-017}
+
+\leavevmode\hypertarget{ref-green1966signal}{}%
+Green, D. M., Swets, J. A., \& others. (1966). \emph{Signal detection theory and psychophysics} (Vol. 1). Wiley New York.
+
+\leavevmode\hypertarget{ref-pennycook2021psychology}{}%
+Pennycook, G., \& Rand, D. G. (2021). The psychology of fake news. \emph{Trends in Cognitive Sciences}, \emph{25}(5), 388--402.
+
+\leavevmode\hypertarget{ref-piironen2020projective}{}%
+Piironen, J., Paasiniemi, M., Vehtari, A., \& others. (2020). Projective inference in high-dimensional problems: Prediction and feature selection. \emph{Electronic Journal of Statistics}, \emph{14}(1), 2155--2197.
+
+\leavevmode\hypertarget{ref-R-base}{}%
+R Core Team. (2020). \emph{R: A language and environment for statistical computing}. R Foundation for Statistical Computing. \url{https://www.R-project.org/}
+
+\leavevmode\hypertarget{ref-loo_2017}{}%
+Vehtari, A., Gelman, A., \& Gabry, J. (2017). Practical bayesian model evaluation using leave-one-out cross-validation and WAIC. \emph{Statistics and Computing}, \emph{27}, 1413--1432. \url{https://doi.org/10.1007/s11222-016-9696-4}
+
+\leavevmode\hypertarget{ref-R-tidyverse}{}%
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T. L., Miller, E., Bache, S. M., Müller, K., Ooms, J., Robinson, D., Seidel, D. P., Spinu, V., \ldots{} Yutani, H. (2019). Welcome to the {tidyverse}. \emph{Journal of Open Source Software}, \emph{4}(43), 1686. \url{https://doi.org/10.21105/joss.01686}
+
+\end{CSLReferences}
+
+
+\clearpage
+\makeatletter
+\efloat@restorefloats
+\makeatother
+
+
+\begin{appendix}
+\hypertarget{covid-19-news-data-set-full-model-with-13-covariates}{%
+\section{COVID-19 news data set: full model with 13
+covariates}\label{covid-19-news-data-set-full-model-with-13-covariates}}
+
+\begin{table}[H]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:table13covid}Posterior mean, standard error, 95\% credible interval and $\hat{R}$
+statistic for each parameter of the full model (13 covariates) predicting COVID-19 news truth discernment.}
+
+\small{
+
+\begin{tabular}{cccccc}
+\toprule
+parameter & \multicolumn{1}{c}{mean} & \multicolumn{1}{c}{SE} & \multicolumn{1}{c}{lower bound} & \multicolumn{1}{c}{upper bound} & \multicolumn{1}{c}{Rhat}\\
+\midrule
+Intercept & -0.331 & 0.050 & -0.429 & -0.231 & 1.000\\
+age & 0.166 & 0.036 & 0.094 & 0.236 & 1.000\\
+agsu & 0.004 & 0.048 & -0.090 & 0.098 & 1.000\\
+conv & -0.125 & 0.054 & -0.230 & -0.020 & 1.000\\
+miis & -0.126 & 0.035 & -0.195 & -0.057 & 1.000\\
+rfsp & -0.033 & 0.047 & -0.126 & 0.060 & 1.000\\
+rfsn & -0.026 & 0.042 & -0.108 & 0.056 & 1.000\\
+educ & 0.073 & 0.030 & 0.013 & 0.132 & 1.000\\
+poli & 0.056 & 0.033 & -0.009 & 0.121 & 1.000\\
+spir & 0.107 & 0.044 & 0.021 & 0.192 & 1.000\\
+para & -0.069 & 0.039 & -0.145 & 0.007 & 1.000\\
+crit & 0.157 & 0.029 & 0.100 & 0.215 & 1.000\\
+cosp & -0.253 & 0.035 & -0.322 & -0.184 & 1.000\\
+supe & -0.069 & 0.040 & -0.147 & 0.010 & 1.000\\
+simp & -0.081 & 0.035 & -0.150 & -0.012 & 1.000\\
+conf & 0.043 & 0.031 & -0.018 & 0.103 & 1.000\\
+rese & -0.016 & 0.033 & -0.082 & 0.048 & 1.000\\
+sex & 0.125 & 0.067 & -0.007 & 0.256 & 1.000\\
+sigma & 0.749 & 0.020 & 0.711 & 0.790 & 1.000\\
+\bottomrule
+\end{tabular}
+
+}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\newpage
+
+\hypertarget{covid-19-news-data-set-best-projection-model-ignoring-the-political-news-data}{%
+\section{COVID-19 news data set: best projection model (ignoring the
+political news
+data)}\label{covid-19-news-data-set-best-projection-model-ignoring-the-political-news-data}}
+
+\begin{table}[H]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:tablebestsubcovid}Posterior mean, standard error, 95\% credible interval and $\hat{R}$
+statistic for each parameter of the best projection model predicting COVID-19 news truth discernment.}
+
+\small{
+
+\begin{tabular}{cccccc}
+\toprule
+parameter & \multicolumn{1}{c}{mean} & \multicolumn{1}{c}{SE} & \multicolumn{1}{c}{lower bound} & \multicolumn{1}{c}{upper bound} & \multicolumn{1}{c}{Rhat}\\
+\midrule
+Intercept & -0.368 & 0.043 & -0.453 & -0.283 & 1.000\\
+miis & -0.142 & 0.034 & -0.209 & -0.075 & 1.000\\
+cosp & -0.285 & 0.033 & -0.350 & -0.221 & 1.000\\
+crit & 0.172 & 0.029 & 0.116 & 0.230 & 1.000\\
+age & 0.188 & 0.032 & 0.126 & 0.250 & 1.000\\
+supe & -0.122 & 0.036 & -0.193 & -0.052 & 1.000\\
+conv & -0.142 & 0.048 & -0.235 & -0.049 & 1.000\\
+sigma & 0.757 & 0.020 & 0.718 & 0.798 & 1.000\\
+\bottomrule
+\end{tabular}
+
+}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+\end{appendix}
+
+\end{document}

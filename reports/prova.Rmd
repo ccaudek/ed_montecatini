@@ -1,0 +1,183 @@
+---
+title             : "Anorexia nervosa entails domain specific impairment of adaptive learning under uncertainty"
+shorttitle        : "Domain specific impairment of learning"
+
+author: 
+  - name          : "Corrado Caudek"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "Via di San Salvi n. 12, Complesso di S. Salvi, Padiglione 26, Firenze, 50139, Italy"
+    email         : "corrado.caudek@unifi.it"
+    role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
+      - "Conceptualization"
+      - "Project administration"
+      - "Formal analysis"
+      - "Writing - Original Draft Preparation"
+      - "Writing - Review & Editing"
+  - name          : "Ilaria Colpizzi"
+    affiliation   : "1"
+    role:
+      - "Writing - Review & Editing"
+      - "Software development"
+      - "Data collection"
+      - "Data curation"
+  - name          : "Claudio Sica"
+    affiliation   : "2"
+    role:
+      - "Writing - Review & Editing"
+      - "Supervision"
+
+affiliation:
+  - id            : "1"
+    institution   : "NEUROFARBA Department, Psychology Section, University of Florence, Italy."
+  - id            : "2"
+    institution   : "Health Sciences Department, Psychology Section, University of Florence,  Italy."
+
+authornote: |
+
+
+
+abstract: |
+  One or two sentences providing a **basic introduction** to the field,  comprehensible to a scientist in any discipline.
+  
+  Two to three sentences of **more detailed background**, comprehensible  to scientists in related disciplines.
+  
+  One sentence clearly stating the **general problem** being addressed by  this particular study.
+  
+  One sentence summarizing the main result (with the words "**here we show**" or their equivalent).
+  
+  Two or three sentences explaining what the **main result** reveals in direct comparison to what was thought to be the case previously, or how the  main result adds to previous knowledge.
+  
+  One or two sentences to put the results into a more **general context**.
+  
+  Two or three sentences to provide a **broader perspective**, readily comprehensible to a scientist in any discipline.
+  
+  <!-- https://tinyurl.com/ybremelq -->
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : "ed.bib"
+linkcolor         : "blue"
+
+floatsintext      : no
+linenumbers       : yes
+draft             : no
+mask              : no
+
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+
+classoption       : "man"
+
+csl               : "apa-with-abstract.csl"
+documentclass     : "apa6"
+output            :
+  papaja::apa6_pdf:
+    includes:
+      after_body: "appendix.tex"
+    latex_engine: "xelatex"
+    extra_dependencies: ["xcolor"]
+editor_options: 
+  chunk_output_type: inline
+  markdown: 
+    wrap: sentence
+header-includes:
+   - \usepackage{apacite}
+   - \usepackage{amsmath}
+   - \usepackage[T1]{fontenc}
+   - \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+   - \usepackage{setspace}\doublespacing
+   - \usepackage{float}
+   - \floatplacement{figure}{H}
+   - \floatplacement{table}{H}
+   - \usepackage[font=small,skip=12pt]{caption}  
+---
+
+```{r, include = FALSE}
+library("papaja")
+r_refs("r-references.bib")
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+```{r packages-data, cache = FALSE, include = FALSE}
+library("here")
+library("tidyverse") # for data manipulation
+library("knitr") # for formatting tables
+library("kableExtra") # for formatting tables even more
+library("patchwork") # for combining plots
+library("khroma") # for color palettes
+library("papaja")
+library("viridis")
+
+theme_set(theme_minimal())
+colors <- c("#007ab1", "#da61b2", "#ff8a0e")
+colors3 <- colour("bright")(3)
+colors7 <- colour("bright")(7)
+# theme_set(theme_apa())
+
+
+# model_list_1_flat <- readRDS("../replication/4_summarise_model_output/model_list_1_flat.rds") %>%
+#   mutate(type_trend = plyr::mapvalues(type_trend, 
+#                                       c("strong", "medium", "weak"),
+#                                       c("Low \nfrequency", "Medium \nfrequency", "High \nfrequency")),
+#          type_trend = factor(type_trend, 
+#                              levels = c("Low \nfrequency", "Medium \nfrequency", "High \nfrequency")),
+#          type_data = plyr::mapvalues(type_data, c("full", "sparse"), c("Full data", "Sparse data")),
+#          type_person_sd = plyr::mapvalues(type_person_sd, c("0sd", "12sd"), c("BPV = 0", "BPV = 1.2")),
+#          type_time_model = plyr::mapvalues(type_time_model, c("ar", "gp", "spline"), c("AR", "GP", "TPS")))
+# 
+# model_list_3_flat <- readRDS("../replication/4_summarise_model_output/model_list_3_flat.rds") %>%
+#   mutate(type_trend = plyr::mapvalues(type_trend, 
+#                                       c("strong", "medium", "weak"),
+#                                       c("Low \nfrequency", "Medium \nfrequency", "High \nfrequency")),
+#          type_trend = factor(type_trend, 
+#                              levels = c("Low \nfrequency", "Medium \nfrequency", "High \nfrequency")),
+#          type_person_sd = plyr::mapvalues(type_person_sd, c("0sd", "12sd"), c("BPV = 0", "BPV = 1.2")),
+#          type_time_model = plyr::mapvalues(type_time_model, c("ar", "gp", "spline"), c("AR", "GP", "TPS")))
+
+```
+
+# Introduction
+
+
+https://doi.org/10.1007/s40167-018-0068-0
+
+To explore the processes underpinning task performance, computational modeling (i.e., drift diffusion model (DDM) analysis) will be used to explicate the specific processes by means of which domain specificigy influences decision-making (e.g., Golubickis et al. 2017, 2018; Macrae et al. 2017). In any task context, there are two distinct ways in which decisional processing can be biased. These pertain to how a stimulus is processed and how a response is generated, with each source of bias reflecting a different underlying component of decisional processing (Voss et al. 2004, 2013; White and Poldrack 2014). Whereas variability in stimulus processing affects the quality of information gathering during decision-making (i.e., dynamic stimulus bias), adjustments in response preparation influence how much evidence is required before a specific judgment is made (i.e., prior or pre-decisional bias). The theoretical value of a DDM analysis resides in its ability to isolate these independent forms of bias, thereby elucidate the component processes that underpin decision-making (Ratcliff 1978; Ratcliff and Rouder 1998; Ratcliff et al. 2016; Voss et al. 2004, 2013; Wagenmakers 2009). 
+
+The DDM assumes that, during binary decision-making (e.g., owned-by-self vs. owned-by-other), noisy information is continuously sampled until sufficient evidence is acquired to initiate a response (see Fig. 1 for a schematic representation of the model). The duration of the diffusion process is known as the decision time, and the process itself can be characterized by several important parameters. Drift rate (v) estimates the speed of information gathering (i.e., larger drift rate = faster information uptake), thus is interpreted as a measure of the quality of visual processing during decision-making (White and Poldrack 2014). Boundary separa- tion (a) estimates the distance between the two decision thresholds (i.e., self-owned vs. other-owned), hence indicates how much evidence is required before a response is made (i.e., larger (smaller) values indicate more conservative (liberal) respond- ing). The starting point (z) defines the position between the decision thresholds at which evidence accumulation begins. If z is not centered between the thresholds (i.e., z = 0.5), this denotes an a priori bias in favor of the response that is closer to the starting point (White and Poldrack 2014). In other words, less evidence is required to reach the preferred (vs. non-preferred) threshold. Finally, the duration of all non-decisional processes is given by the additional parameter t0, which is taken to indicate biases in stimulus encoding and response execution (Voss et al. 2010).
+
+
+# Methods
+
+We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+
+## Participants
+
+## Material
+
+## Procedure
+
+## Data analysis
+We used `r cite_r("r-references.bib")` for all our analyses.
+
+
+# Results
+
+# Discussion
+
+
+\newpage
+
+# References
+
+::: {#refs custom-style="Bibliography"}
+:::
